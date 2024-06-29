@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -59,25 +61,16 @@ public class Campaign extends BaseEntity {
     @Column(name = "training_end_date")
     private Date trainingEndDate;
 
-    @NotNull(message = "This field must not be null")
-    @Column(name = "number_of_session")
-    private Integer numberOfSession;
+    @Column(name = "img")
+    private String img;
 
-    @NotNull(message = "This field must not be null")
-    @Column(name = "min_offline_session")
-    private Integer minOfflineSession;
+    @Column(name = "description")
+    private String description;
 
-    @NotNull(message = "This field must not be null")
-    @Column(name = "min_online_session")
-    private Integer minOnlineSession;
+    @OneToMany(mappedBy = "campaign")
+    private List<CampaignMentorProfile> campaignMentorProfiles = new ArrayList<>();
 
-    @NotNull(message = "This field must not be null")
-    @Column(name = "min_session_duration")
-    private Integer minSessionDuration;
-
-    @NotNull(message = "This field must not be null")
-    @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    private Company company;
+    @OneToMany(mappedBy = "campaign")
+    private List<MentorApply> mentorApplies = new ArrayList<>();
 
 }

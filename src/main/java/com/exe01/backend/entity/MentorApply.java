@@ -18,8 +18,6 @@ import lombok.Setter;
 @Table(name = "mentor_apply_tbl")
 public class MentorApply extends BaseEntity {
 
-    @NotNull(message = "This field must not be null")
-    @NotBlank(message = "This field must not be blank")
     @Column(name = "feedback")
     private String feedback;
 
@@ -27,5 +25,13 @@ public class MentorApply extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "application_id")
     private Application application;
+
+    @OneToOne
+    @JoinColumn(name = "mentee_id", referencedColumnName = "id")
+    private Mentee mentee;
+
+    @ManyToOne
+    @JoinColumn(name = "campaign_id", referencedColumnName = "id")
+    private Campaign campaign;
 
 }

@@ -4,14 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -22,6 +17,16 @@ import java.util.List;
 @Entity
 @Table(name = "company_tbl")
 public class Company extends BaseEntity {
+
+
+    @OneToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
+
+    @NotBlank(message = "This field must not be blank")
+    @NotNull(message = "This field must not be null")
+    @Column(name = "name")
+    private String name;
 
     @NotBlank(message = "This field must not be blank")
     @NotNull(message = "This field must not be null")
@@ -34,6 +39,8 @@ public class Company extends BaseEntity {
     @Column(name = "company_type", nullable = false)
     private String companyType;
 
+    @NotBlank(message = "This field must not be blank")
+    @NotNull(message = "This field must not be null")
     @Column(name = "company_size")
     private Integer companySize;
 
@@ -58,27 +65,18 @@ public class Company extends BaseEntity {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @NotBlank(message = "This field must not be blank")
-    @NotNull(message = "This field must not be null")
-    @Column(name = "key_skill")
-    private String keySkill;
+    @Column(name = "company_website_url")
+    private String company_website_url;
+
+    @Column(name = "facebook_url")
+    private String facebook_url;
 
     @NotBlank(message = "This field must not be blank")
     @NotNull(message = "This field must not be null")
-    @Column(name = "img")
-    private String img;
-
-    @NotBlank(message = "This field must not be blank")
-    @NotNull(message = "This field must not be null")
-    @Column(name = "top_reason")
-    private String topReason;
-
-    @NotBlank(message = "This field must not be blank")
-    @NotNull(message = "This field must not be null")
-    @Column(name = "url")
-    private String url;
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(mappedBy = "company")
-    private List<Campaign> campaigns = new ArrayList<>();
+    private List<Mentor> mentors = new ArrayList<>();
 
 }

@@ -23,11 +23,7 @@ import java.util.List;
 public class Application extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "mentee_id")
-    private Mentee mentee;
-
-    @ManyToOne
-    @JoinColumn(name = "mentor_id")
+    @JoinColumn(name = "mentor_id",referencedColumnName = "id")
     private Mentor mentor;
 
     @Column(name = "full_name")
@@ -41,9 +37,6 @@ public class Application extends BaseEntity {
 
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Column(name = "job")
-    private String job;
 
     @Column(name = "facebook_url")
     private String facebookUrl;
@@ -62,5 +55,10 @@ public class Application extends BaseEntity {
 
     @OneToOne(mappedBy = "application")
     private MentorApply mentorApply;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id",referencedColumnName = "id")
+    private Student student;
+
 
 }

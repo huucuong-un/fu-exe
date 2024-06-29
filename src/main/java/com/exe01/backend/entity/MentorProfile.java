@@ -23,6 +23,12 @@ public class MentorProfile extends BaseEntity {
     @Column(name = "linkedin_url")
     private String linkedinUrl;
 
+    @Column(name = "facebook_url")
+    private String facebookUrl;
+
+    @Column(name = "google_meet_url")
+    private String googleMeetUrl;
+
     @NotBlank(message = "This field must not be blank")
     @NotNull(message = "This field must not be null")
     @Column(name = "requirement")
@@ -51,4 +57,6 @@ public class MentorProfile extends BaseEntity {
     @JoinColumn(name = "mentor_id", referencedColumnName = "id")
     private Mentor mentor;
 
+    @OneToMany(mappedBy = "mentorProfile")
+    private List<CampaignMentorProfile> campaignMentorProfiles = new ArrayList<>();
 }

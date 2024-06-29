@@ -36,9 +36,6 @@ public class Account extends BaseEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @NotBlank(message = "This field must not be blank")
-    @NotNull(message = "This field must not be null")
-    @Size(max = 200, message = "Avatar must be less than or equal to 200 characters")
     @Column(name = "avatar_url")
     private String avatarUrl;
 
@@ -48,9 +45,15 @@ public class Account extends BaseEntity implements UserDetails {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "point")
+    private Integer point;
+
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Transaction> transactions = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -79,7 +82,7 @@ public class Account extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 }

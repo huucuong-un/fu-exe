@@ -1,23 +1,22 @@
 package com.exe01.backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MentorDTO extends BaseDTO implements Serializable {
+
+    private CompanyDTO company;
 
     private AccountDTO account;
 
-    private List<MentorProfileDTO> mentorProfiles;
-
     private String status;
+
+    private String fullName;
 
 }
